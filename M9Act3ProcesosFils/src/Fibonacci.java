@@ -14,21 +14,33 @@ public class Fibonacci {
 		}
 	}
 	
-	public static void temps() {
+	public static void tempsInici() {
 		//Mostra el resultat
 		Calendar calendario = new GregorianCalendar();
-		System.out.println("Hora execució tasca: "
+		System.out.println("Hora inici tasca: "
 				+ calendario.get(Calendar.HOUR_OF_DAY) + ":"
 				+ calendario.get(Calendar.MINUTE) + ":"
 				+ calendario.get(Calendar.SECOND));
-		System.out.println("Tasca en execució");
-		System.out.println("Execució acabada");
+		
+		
+	}
+	
+	public static void tempsFi() {
+		//Mostra el resultat
+		Calendar calendario = new GregorianCalendar();
+		System.out.println("Hora fi tasca: "
+				+ calendario.get(Calendar.HOUR_OF_DAY) + ":"
+				+ calendario.get(Calendar.MINUTE) + ":"
+				+ calendario.get(Calendar.SECOND));
+			
 	}
 	
 
 	public static void main(String[] args) {
-		System.out.println(calculaFibonacci(30));
-		temps();
+		tempsInici();
+		System.out.println(calculaFibonacci(35));
+		tempsFi();
+		
 				
 	}
 		
