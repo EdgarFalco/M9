@@ -27,15 +27,5 @@ public class Fibonacci {
 		double temps = (double) ((fin - inicio)/1000);
 	         
 	    System.out.println("Tarda: " + temps +" segons a calcular Fibonacci de " + NumeroFibonacci );
-		
-				
 	}
-		
-
-		
-
-	
-
-	
-	
 }
