@@ -20,7 +20,7 @@ public class Fibonacci {
 	public static void main(String[] args) throws InterruptedException {
 		long inicio = System.currentTimeMillis();
 		
-		int NumeroFibonacci=45;
+		int NumeroFibonacci=46;
 				
 		System.out.println(calculaFibonacci(NumeroFibonacci));
 		long fin = System.currentTimeMillis();

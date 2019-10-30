@@ -11,7 +11,7 @@ public class A_fibonacci_forkJoin extends RecursiveTask<Long> {
 	@Override
 	protected Long compute() {
 		
-		//double calcul = java.lang.Math.cos(54879854);
+		double calcul = java.lang.Math.cos(54879854);
 		if(numero <= 1) return numero;
 		A_fibonacci_forkJoin fib1 = new A_fibonacci_forkJoin(numero-1);
 		//fib1.fork();
@@ -22,7 +22,7 @@ public class A_fibonacci_forkJoin extends RecursiveTask<Long> {
 	
 	public static void main(String[] args){
 		long inicio = System.currentTimeMillis();
-		int NumeroFibonacci=45;
+		int NumeroFibonacci=46;
 		
 		ForkJoinPool pool = new ForkJoinPool();
 		System.out.println("Calculat: " + pool.invoke(new A_fibonacci_forkJoin(NumeroFibonacci)));
