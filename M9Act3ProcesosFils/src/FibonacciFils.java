@@ -1,3 +1,6 @@
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveTask;
+
 
 public class FibonacciFils {
 
@@ -20,10 +23,9 @@ public class FibonacciFils {
 			return fib1.compute() + fib2.join();
 		}
 
-		public static void main(String[] args) {
+		public void main(String[] args) {
 			ForkJoinPool pool = new ForkJoinPool();
-			System.out.println("Calculat: "
-					+ pool.invoke(new A_fibonacci_forkJoin(35)));
+			System.out.println("Calculat: " + pool.invoke(new A_fibonacci_forkJoin(34)));
 		}
 	}
 
