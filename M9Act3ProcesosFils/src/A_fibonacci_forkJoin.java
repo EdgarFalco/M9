@@ -30,6 +30,6 @@ public class A_fibonacci_forkJoin extends RecursiveTask<Long> {
 		long fin = System.currentTimeMillis();
 		double temps = (double) ((fin - inicio)/1000);
 		
-		System.out.println("Tarda: " + temps);
+		System.out.println("Tarda: " + temps +" segons a calcular Fibonacci de " + NumeroFibonacci );
 	}
 }
