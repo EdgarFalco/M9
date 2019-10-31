@@ -34,18 +34,24 @@ public class Bombolla
     private static void burbuja(int arreglo[])
     {
         for(int i = 0; i < arreglo.length - 1; i++)
-        {
+        {        	         	
             for(int j = 0; j < arreglo.length - 1; j++)
             {
                 if (arreglo[j] < arreglo[j + 1])
                 {
-                	for(int x = 0; x < arreglo.length; x++)
-                    {
-                        System.out.print(arreglo[x] + " ");
-                    }
+                    int tmp = arreglo[j+1];
+                    arreglo[j+1] = arreglo[j];
+                    arreglo[j] = tmp;
                 }
+               
             }
+            for (int k = 0; k < arreglo.length; k++) {
+             	System.out.println(arreglo[k]+" ");
+            }
+            System.out.println("\n");
         }
-     
+        
     }
+     
 }
+
