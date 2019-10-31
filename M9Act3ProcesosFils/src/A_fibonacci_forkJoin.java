@@ -22,7 +22,7 @@ public class A_fibonacci_forkJoin extends RecursiveTask<Long> {
 	
 	public static void main(String[] args){
 		long inicio = System.currentTimeMillis();
-		int NumeroFibonacci=46;
+		int NumeroFibonacci=35;
 		
 		ForkJoinPool pool = new ForkJoinPool();
 		System.out.println("Calculat: " + pool.invoke(new A_fibonacci_forkJoin(NumeroFibonacci)));
