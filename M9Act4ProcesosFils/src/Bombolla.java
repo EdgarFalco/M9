@@ -9,11 +9,11 @@ public class Bombolla
     	
     	
     	burbuja(data);
-    	
-    	   for(int i = 0;i < data.length; i++)
-           {
-               System.out.print(data[i]+" ");
-           }
+    	System.out.println("Final: ");
+    	for(int i = 0;i < data.length; i++)
+        {
+    		System.out.print(data[i]+" ");
+        }
         
     }
     
@@ -46,8 +46,9 @@ public class Bombolla
                 }
                 
             }
+            System.out.println("ordenant...");
             for (int k = 0; k < arreglo.length; k++) {
-             	System.out.println(arreglo[k]+" ");
+             	System.out.print(arreglo[k]+" ");
             }
             System.out.println("\n");
             
