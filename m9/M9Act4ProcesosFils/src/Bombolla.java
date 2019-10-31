@@ -4,7 +4,8 @@ import java.io.*;
 public class Bombolla
 {
     public static void main(String arg[]) throws IOException
-    {
+    {	
+    	//Creem un array de les posicions que li indiquem
     	int[] data = createArray(10);
     	
     	
