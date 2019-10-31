@@ -1,10 +1,13 @@
 
 import java.io.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
  
 public class Bombolla
 {
     public static void main(String arg[]) throws IOException
     {
+    	final ScheduledExecutorService schExService = Executors.newScheduledThreadPool(4);
     	//Crea un array amb la mida especificada
     	int[] data = createArray(10);
     	
@@ -58,6 +61,14 @@ public class Bombolla
         }
         
     }
+    
+    class ExecutaFil implements Runnable {
+		
+    	@Override
+		public void run() {
+			
+		}
+	}
      
 }
 
