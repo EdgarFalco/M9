@@ -5,10 +5,12 @@ public class Bombolla
 {
     public static void main(String arg[]) throws IOException
     {
+    	//Crea un array amb la mida especificada
     	int[] data = createArray(10);
     	
-    	
+    	//Metode que ordena l'array
     	burbuja(data);
+    	//Mostra el resultat final
     	System.out.println("Final: ");
     	for(int i = 0;i < data.length; i++)
         {
@@ -31,7 +33,7 @@ public class Bombolla
   	}
     
         
-    //Metode, Bombolla ho
+    //Metode, Bombolla
     private static void burbuja(int arreglo[])
     {
         for(int i = 0; i < arreglo.length - 1; i++)
@@ -46,6 +48,7 @@ public class Bombolla
                 }
                 
             }
+            //Mostra l'array quan l'algoritme esta ordenant
             System.out.println("ordenant...");
             for (int k = 0; k < arreglo.length; k++) {
              	System.out.print(arreglo[k]+" ");
