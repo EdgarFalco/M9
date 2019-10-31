@@ -6,7 +6,14 @@ public class Bombolla
     public static void main(String arg[]) throws IOException
     {
     	int[] data = createArray(100);
-    	System.out.println(burbuja(data));
+    	
+    	
+    	burbuja(data);
+    	
+    	   for(int i = 0;i < data.length; i++)
+           {
+               System.out.print(data[i]+" ");
+           }
         
     }
     
@@ -32,15 +39,13 @@ public class Bombolla
             {
                 if (arreglo[j] < arreglo[j + 1])
                 {
-                    int tmp = arreglo[j+1];
-                    arreglo[j+1] = arreglo[j];
-                    arreglo[j] = tmp;
+                	for(int x = 0; x < arreglo.length; x++)
+                    {
+                        System.out.print(arreglo[x] + " ");
+                    }
                 }
             }
         }
-        for(int i = 0;i < arreglo.length; i++)
-        {
-            System.out.print(arreglo[i]+"\n");
-        }
+     
     }
 }
