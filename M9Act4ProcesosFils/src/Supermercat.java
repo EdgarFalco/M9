@@ -28,6 +28,21 @@ public class Supermercat {
 			// TODO Auto-generated method stub
 			
 		}
+		public void mostraClient(int contador) {
+
+			int numArtAleatorio = (int) (Math.random() * (30 - 1) + 1);
+			this.numArticulos = new int[numArtAleatorio];
+
+			
+			System.out.print("Client: " + contador + " amb " + numArticles.length + " articles ");
+
+			
+			}
+
+		
+		
+			System.out.println();
+		}
 	}
 
 	
