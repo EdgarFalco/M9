@@ -17,7 +17,9 @@ public class Bombolla
         }
     }
     
-  //Metode, per crear un array on especifiques la mida
+    //METODES
+    
+    //Metode, per crear un array on especifiques la mida
   	private static int[] createArray(int size) {
   		int[] ret = new int[size];
   		for (int i = 0; i < size; i++) {
@@ -28,8 +30,8 @@ public class Bombolla
   		}
   		return ret;
   	}
-    
-        
+      
+  	
     //Metode, Bombolla Ordena de mes gran a més petit una llista
     private static void burbuja(int arreglo[])
     {
@@ -43,17 +45,13 @@ public class Bombolla
                     arreglo[j + 1] = arreglo[j];
                     arreglo[j] = tmp;
                 }
-             
-                 
-             }
+            }
             System.out.println("ordenant...");	
             for (int k = 0; k < arreglo.length; k++) {
            	 System.out.print(arreglo[k]+" ");
             }
             System.out.println("\n");
         }
-        
     }
-     
 }
 
