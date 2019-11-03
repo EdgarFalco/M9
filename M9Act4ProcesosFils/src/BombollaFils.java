@@ -1,7 +1,12 @@
 import java.io.IOException;
+import java.util.concurrent.RecursiveTask;
  
-public class BombollaFils
-{
+public class BombollaFils extends RecursiveTask<Short>{
+	
+	private static final int LLINDAR = 1;
+	private short[] arr;
+	private int inici, fi;
+			
     public static void main(String arg[]) throws IOException
     {
     	//Crea un array de mida 10 o la que especifiquem
@@ -52,6 +57,23 @@ public class BombollaFils
             System.out.println("\n");
         }
     }
+
+	@Override
+	protected Short compute() {
+		if(inici >= LLINDAR){
+			if (inici == 1) {
+				burbuja(arr, 0, fi);
+				} else {
+					burbuja(arr, fi/2 + 1, fi);
+				}
+				
+				burbuja(arr, inici, fi);
+			}else{			
+				getMaxReq();
+			}
+			return null;
+	}
+	
+
+
 }
-
-
