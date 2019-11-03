@@ -12,9 +12,7 @@ public class SupermercatTester {
         for (int i = 0; i < 2; i++) {
 			clients.add(new Client("Client "+ i, new int[]{ 2, 2, 1, 5, 2 }));
 		}
-        
-        
-        
+                
         long init = System.currentTimeMillis();  // Inici
         
         ExecutorService executor = Executors.newFixedThreadPool(fils);
