@@ -21,16 +21,13 @@ public class BombollaFils extends RecursiveTask<Short>{
 		short[] data = createArray(10);
 
 		// Mira el número de processadors
-		System.out.println("Inici càlcul");
 		ForkJoinPool pool = new ForkJoinPool();
 
 		int inici = 0;
 		int fi = data.length;
 
 		// Crea una tasca
-		MaximTask tasca = new MaximTask(data, inici, fi);
-		// Guarda el temps
-		long time = System.currentTimeMillis();
+		BombollaFils tasca = new BombollaFils(data, inici, fi);
 		// crida la tasca i espera que es completin
 		pool.invoke(tasca);
 		// Guarda la tasca que ha sigut treballada amb fils
@@ -45,12 +42,12 @@ public class BombollaFils extends RecursiveTask<Short>{
     
     //METODES
     
-    //Metode, per crear un array on especifiques la mida
-  	private static int[] createArray(int size) {
-  		int[] ret = new int[size];
+  //Metode, per crear un array on especifiques la mida, genera numeros del 0 al 999
+  	private static short[] createArray(int size) {
+  		short[] ret = new short[size];
   		for (int i = 0; i < size; i++) {
-  			ret[i] = (int) (1000 * Math.random());
-  			if (i == ((int) (size * 0.9))) {
+  			ret[i] = (short) (1000 * Math.random());
+  			if (i == ((short) (size * 0.9))) {
   				ret[i] = 105;
   			}
   		}
@@ -78,13 +75,13 @@ public class BombollaFils extends RecursiveTask<Short>{
  
   //Metode, crea dos tasques una començara pel principi de la llista i l'altre pel mig de la llista
   	//i aplica un fork per treballarles amb fils per despres unirles amb join.
-  	private void getMaxReq() {
-  		MaximTask task1;
-  		MaximTask task2;
+  	private void getOrdreReq() {
+  		BombollaFils task1;
+  		BombollaFils task2;
   		int mig = (inici + fi) / 2 + 1;
-  		task1 = new MaximTask(arr, 1, mig);
+  		task1 = new BombollaFils(arr, 1, mig);
   		task1.fork();
-  		task2 = new MaximTask(arr, 2, fi);
+  		task2 = new BombollaFils(arr, 2, fi);
   		task2.fork();
   		task1.join(); 
   		task2.join();
@@ -93,16 +90,16 @@ public class BombollaFils extends RecursiveTask<Short>{
   	//Metode RecursiveTask
 	@Override
 	protected Short compute() {
+		
 		if(inici >= LLINDAR){
 			if (inici == 1) {
 				burbuja(arr, 0, fi);
 				} else {
 					burbuja(arr, fi/2 + 1, fi);
 				}
-				
 				burbuja(arr, inici, fi);
 			}else{			
-				getMaxReq();
+				getOrdreReq();
 			}
 			return null;
 	}
