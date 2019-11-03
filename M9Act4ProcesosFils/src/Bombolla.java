@@ -13,7 +13,7 @@ public class Bombolla
     	System.out.println("Ordenacio Completada: ");
     	for(int i = 0;i < data.length; i++)
         {
-            System.out.print(data[i]+" ");
+            System.out.print(data[i] + " ");
         }
     }
     
@@ -26,7 +26,6 @@ public class Bombolla
   				ret[i] = 105;
   			}
   		}
-  		
   		return ret;
   	}
     
@@ -40,8 +39,8 @@ public class Bombolla
             {
                 if (arreglo[j] < arreglo[j + 1])
                 {
-                    int tmp = arreglo[j+1];
-                    arreglo[j+1] = arreglo[j];
+                    int tmp = arreglo[ j + 1];
+                    arreglo[j + 1] = arreglo[j];
                     arreglo[j] = tmp;
                 }
              
