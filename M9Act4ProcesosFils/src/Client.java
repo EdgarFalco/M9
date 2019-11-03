@@ -1,19 +1,19 @@
 
 public class Client {
-	private String nombre;
+	private String nom;
 	private int[] carroCompra;
 	
-	public Client(String nombre, int[] carroCompra) {
-		this.nombre = nombre;
+	public Client(String nom, int[] carroCompra) {
+		this.nom = nom;
 		this.carroCompra = carroCompra;
 	}
 
 	public String getNombre() {
-		return nombre;
+		return nom;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nom = nom;
 	}
 
 	public int[] getCarroCompra() {
