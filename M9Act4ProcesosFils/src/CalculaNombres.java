@@ -12,7 +12,7 @@ public class CalculaNombres extends RecursiveTask<Double>{
 		this.numero1 = numero1;
 		this.numero2 = numero2;
 	}    
-	//Calclul
+	//Calcluls
 	public static double calcul(double numero3, double numero4) {
 		if (numero4 > 0) {
 			return numero3 * calcul(numero3, numero4 - 1);
