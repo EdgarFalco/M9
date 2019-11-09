@@ -31,7 +31,7 @@ public class BombollaFils implements Runnable {
 	
 	public static void main(String[] args) {
 		//Creem array
-		int[] arrayNum = generarNumeros(12);
+		int[] arrayNum = generarNumeros(100);
 		
 		//Controlem les posicions de l'array
 		int primerCuarto = 0;
@@ -59,7 +59,7 @@ public class BombollaFils implements Runnable {
 		Runnable hilo2 = new BombollaFils(arrayNum, segundoCuarto, finalSegundoCuarto);
 		Thread thread2 = new Thread(hilo2);
 		
-		Runnable hilo3 = new BombollaFils(arrayNum, inicioTercerCuarto, finalSegundoCuarto);
+		Runnable hilo3 = new BombollaFils(arrayNum, inicioTercerCuarto, finalTercerCuarto);
 		Thread thread3 = new Thread(hilo3);
 		
 		Runnable hilo4 = new BombollaFils(arrayNum, inicioUltimo, finalFinal);
@@ -75,28 +75,28 @@ public class BombollaFils implements Runnable {
 				
 		//Mostra el resultat de les 4 llistes ordenades
 		System.out.println("Part 1 Llista ordenada: ");
-		for (int i = 0; i <= 2; i++) {
+		for (int i = primerCuarto; i <= finalPrimerCuarto; i++) {
 			System.out.print(arrayNum[i] + " ");
 		}
 		
 		System.out.println("\n");
 		
 		System.out.println("Part 2 Llista ordenada: ");
-		for (int i = 3; i <= 5; i++) {
+		for (int i = segundoCuarto; i <= finalSegundoCuarto; i++) {
 			System.out.print(arrayNum[i] + " ");
 		}
 		
 		System.out.println("\n");
 		
 		System.out.println("Part 3 Llista ordenada: ");
-		for (int i = 6; i <= 8; i++) {
+		for (int i = inicioTercerCuarto; i <= finalTercerCuarto; i++) {
 			System.out.print(arrayNum[i] + " ");
 		}
 		
 		System.out.println("\n");
 		
 		System.out.println("Part 4 Llista ordenada: ");
-		for (int i = 9; i <= 11; i++) {
+		for (int i = inicioUltimo; i <= finalFinal; i++) {
 			System.out.print(arrayNum[i] + " ");
 		}
 	}
