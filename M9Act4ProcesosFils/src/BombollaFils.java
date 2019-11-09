@@ -1,109 +1,149 @@
-import java.io.IOException;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.RecursiveTask;
- 
-public class BombollaFils extends RecursiveTask<Short>{
+public class BombollaFils implements Runnable {
+
+	private int[] array;
+	private int inicio;
+	private int finalArray;
 	
-	private static final int LLINDAR = 1;
-	private short[] arr;
-	private int inici, fi;
-	
-	//Constructor
-		public BombollaFils(short[] arr, int inici, int fi) {
-			this.arr = arr;
-			this.inici = inici;
-			this.fi = fi;
+	public BombollaFils (int[]array, int inicio, int finalArray){
+		
+		this.array = array;
+		this.inicio = inicio;
+		this.finalArray = finalArray;
 	}
 		
-    public static void main(String arg[]) throws IOException
-    {
-		// Crea un array
-		short[] data = createArray(10);
+	public void bombollaOrdena(int[] array, int inicio, int finalArray) {
+		//int contador = 0;
+		//contador ++;
+		//System.out.println("Llista"+contador);
+		for(int i = inicio; i < finalArray; i++)
+        {        	         	
+            for(int j = inicio; j < finalArray; j++)
+            {
+                if (array[j] < array[j + 1])
+                {
+                    int tmp = array[ j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = tmp;
+                }
+            }
+//            System.out.println("ordenant...");	
+//            for (int k = inicio; k <= finalArray; k++) {
+//           	 System.out.print(array[k]+" ");
+            }
+            //System.out.println("\n");
+    }
+    
+	
+	//}
 
-		// Mira el número de processadors
-		ForkJoinPool pool = new ForkJoinPool();
+	public static void main(String[] args) {
 
-		int inici = 0;
-		int fi = data.length;
+		int[] arrayNum = generarNumeros(12);
+		int primerCuarto = 0;
+		int finalPrimerCuarto = (arrayNum.length / 4) - 1;
 
-		// Crea una tasca
-		BombollaFils tasca = new BombollaFils(data, inici, fi);
-		// crida la tasca i espera que es completin
-		pool.invoke(tasca);
-		// Guarda la tasca que ha sigut treballada amb fils
-		tasca.join();
+		int segundoCuarto = finalPrimerCuarto + 1;
+		int finalSegundoCuarto = (arrayNum.length / 2) - 1;
 
-		System.out.println("Ordenant...");
-		for (int k = 0; k < data.length; k++) {
-			System.out.println(data[k] + " ");
+		int inicioTercerCuarto = finalSegundoCuarto + 1;
+		int finalTercerCuarto = arrayNum.length - 1;
+		
+		System.out.println("Creacio llista: ");
+		for (int i = 0; i < arrayNum.length; i++) {
+			System.out.print(arrayNum[i] + " ");
 		}
-		System.out.println("Ordenacio completada");
-    }
-    
-    //METODES
-    
-  //Metode, per crear un array on especifiques la mida, genera numeros del 0 al 999
-  	private static short[] createArray(int size) {
-  		short[] ret = new short[size];
-  		for (int i = 0; i < size; i++) {
-  			ret[i] = (short) (1000 * Math.random());
-  			if (i == ((short) (size * 0.9))) {
-  				ret[i] = 105;
-  			}
-  		}
-  		return ret;
-  	}
-      	 	
-    //Metode, Bombolla Ordena de mes gran a més petit una llista
-   	private static void burbuja(short arreglo[], int inici, int fi)
-    {
-          for(int i = inici; i < fi - 1; i++)
-          {        	         	
-              for(int j = 0; j < arreglo.length - 1; j++)
-              {
-                  if (arreglo[j] < arreglo[j + 1])
-                  {
-                      short tmp = arreglo[j+1];
-                      arreglo[j+1] = arreglo[j];
-                      arreglo[j] = tmp;
-                  }
-              }
-              
-          }
-          
-    }
- 
-  //Metode, crea dos tasques una començara pel principi de la llista i l'altre pel mig de la llista
-  	//i aplica un fork per treballarles amb fils per despres unirles amb join.
-  	private void getOrdreReq() {
-  		BombollaFils task1;
-  		BombollaFils task2;
-  		int mig = (inici + fi) / 2 + 1;
-  		task1 = new BombollaFils(arr, 1, mig);
-  		task1.fork();
-  		task2 = new BombollaFils(arr, 2, fi);
-  		task2.fork();
-  		task1.join(); 
-  		task2.join();
-  	}
-  
-  	//Metode RecursiveTask
-	@Override
-	protected Short compute() {
+		System.out.println("\n");
 		
-		if(inici >= LLINDAR){
-			if (inici == 1) {
-				burbuja(arr, 0, fi);
-				} else {
-					burbuja(arr, fi/2 + 1, fi);
-				}
-				burbuja(arr, inici, fi);
-			}else{			
-				getOrdreReq();
-			}
-			return null;
+		Runnable hilo1 = new BombollaFils(arrayNum, primerCuarto, finalPrimerCuarto);
+		Thread thread1 = new Thread(hilo1);
+		
+		Runnable hilo2 = new BombollaFils(arrayNum, segundoCuarto, finalSegundoCuarto);
+		Thread thread2 = new Thread(hilo2);
+		
+		Runnable hilo3 = new BombollaFils(arrayNum, 6, 8);
+		Thread thread3 = new Thread(hilo3);
+		
+		Runnable hilo4 = new BombollaFils(arrayNum, 9, 11);
+		Thread thread4 = new Thread(hilo4);
+		
+		new Thread(thread1).start();
+		
+		new Thread(thread2).start();
+		
+		new Thread(thread3).start();
+		
+		new Thread(thread4).start();
+				
+
+		System.out.println("Part 1 Llista ordenada: ");
+		for (int i = 0; i <= 2; i++) {
+			System.out.print(arrayNum[i] + " ");
+		}
+		
+		System.out.println("\n");
+		
+		System.out.println("Part 2 Llista ordenada: ");
+		for (int i = 3; i <= 5; i++) {
+			System.out.print(arrayNum[i] + " ");
+		}
+		
+		System.out.println("\n");
+		
+		System.out.println("Part 3 Llista ordenada: ");
+		for (int i = 6; i <= 8; i++) {
+			System.out.print(arrayNum[i] + " ");
+		}
+		
+		System.out.println("\n");
+		
+		System.out.println("Part 4 Llista ordenada: ");
+		for (int i = 9; i <= 11; i++) {
+			System.out.print(arrayNum[i] + " ");
+		}
+		
+		
 	}
-	
 
+// Retorna un array con números aleatorios del 1 al 100 excluyéndolo
+	private static int[] generarNumeros(int size) {
 
+		int[] array = new int[size];
+
+		for (int i = 0; i < size; i++) {
+
+			array[i] = (int) (Math.random() * (1000 - 1) + 1);
+		}
+		return array;
+	}
+
+//// Ordena un array que pasamos por parámetros de menor a mayor e imprime cada cambio que hace
+//	private static void burbuja(int arreglo[], int inici, int fi) {
+//
+//		for (int i = inici; i < fi - 1; i++) {
+//
+//			for (int j = 0; j < arreglo.length - 1; j++) {
+//
+//				if (arreglo[j] < arreglo[j + 1]) {
+//					int tmp = arreglo[j + 1];
+//					arreglo[j + 1] = arreglo[j];
+//					arreglo[j] = tmp;
+//				}
+//			}
+//		}
+//	}
+
+	@Override
+	public void run() {
+		bombollaOrdena(this.array, this.inicio, this.finalArray);
+		
+//		System.out.println("Ordenat: ");
+//		for (int i = inicio; i <= finalArray; i++) {
+//			
+//			System.out.print(array[i]+" ");
+//			
+//		}
+//		System.out.println();
+//		
+	}
 }
+
