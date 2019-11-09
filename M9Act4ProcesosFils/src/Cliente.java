@@ -6,24 +6,16 @@ public class Cliente {
 	public Cliente() {	
 	}
 
-	public Cliente(String nombre, int[] arrayArticulos) {
-		this.cliente = nombre;
+	public Cliente(String cliente, int[] arrayArticulos) {
+		this.cliente = cliente;
 		this.arrayArticulos = arrayArticulos;
 	}
 
-	public String getNombre() {
+	public String getCliente() {
 		return cliente;
-	}
-
-	public void setNombre(String nombre) {
-		this.cliente = nombre;
 	}
 
 	public int[] getArrayArticulos() {
 		return arrayArticulos;
 	}
-
-	public void setArrayArticulos(int[] arrayArticulos) {
-		this.arrayArticulos = arrayArticulos;
-	}	
 }
