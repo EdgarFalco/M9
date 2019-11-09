@@ -25,7 +25,7 @@ public class Bombolla
   		for (int i = 0; i < size; i++) {
   			ret[i] = (int) (1000 * Math.random());
   			if (i == ((int) (size * 0.9))) {
-  				ret[i] = 105;
+  				
   			}
   		}
   		return ret;
