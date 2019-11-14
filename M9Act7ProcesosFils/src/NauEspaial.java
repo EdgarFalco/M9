@@ -3,6 +3,8 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+//CLASS NAU ESPAIAL ================================================================================================================================
+
 public class NauEspaial extends javax.swing.JFrame {
 
 	public NauEspaial() {
@@ -24,6 +26,8 @@ public class NauEspaial extends javax.swing.JFrame {
 				Short.MAX_VALUE));
 		pack();
 	}
+
+//MAIN ================================================================================================================================	
 
 	public static void main(String args[]) {
 		try {
@@ -47,12 +51,18 @@ public class NauEspaial extends javax.swing.JFrame {
 	}
 }
 
+//CLASS PANELNAU ================================================================================================================================
+
 class PanelNau extends JPanel implements Runnable, KeyListener {
-	private int numNaus = 3;
+	private int numNaus = 10;
 	Nau[] nau;
 	Nau nauPropia;
+	Bala bala;
+	Bala balaEnemic;
+	Vector<Bala> listBalas = new Vector<Bala>();
 	
 	public PanelNau() {
+		setBackground(Color.GRAY);
 		nau = new Nau[numNaus];
 		for (int i = 0; i < nau.length; i++) {
 			Random rand = new Random();
@@ -63,10 +73,15 @@ class PanelNau extends JPanel implements Runnable, KeyListener {
 			int dY = rand.nextInt(3) + 1;
 			String nomNau = Integer.toString(i);
 			nau[i] = new Nau(nomNau, posX, posY, dX, dY, velocitat, "/images/nau3.png");
+			
 		}
 		
 		// Creo la nau propia
 		nauPropia = new Nau("NauNostra", 200, 400, 10, 0, 100, "/images/nau2.png" );
+		//Crea la bala
+		bala = new Bala();
+		balaEnemic = new Bala();
+		
 
 		// Creo fil per anar pintant cada 0,1 segons el joc per pantalla
 		Thread n = new Thread(this);
@@ -93,9 +108,17 @@ class PanelNau extends JPanel implements Runnable, KeyListener {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (int i = 0; i < nau.length; ++i)
+		//Pinta les naus enemigues
+		for (int i = 0; i < nau.length; ++i){
 			nau[i].pinta(g);
+		}
+		//Pinta la nostra nau
 		nauPropia.pinta(g);
+		
+		//Pinta els dispars de la nostra nau
+		for (int i = 0; i < listBalas.size(); i++) {
+			listBalas.elementAt(i).pinta(g);
+		}
 	}
 
 	// Metodes necesaris per gestionar esdeveniments del teclat
@@ -110,19 +133,25 @@ class PanelNau extends JPanel implements Runnable, KeyListener {
 		if (e.getKeyCode() == 37) {
 			nauPropia.esquerra();
 		} // System.out.println("a l'esquerra"); }
-		if (e.getKeyCode() == 39) {
+		if (e.getKeyCode() == 39) { 
 			nauPropia.dreta();
 		} // System.out.println("a la dreta"); }
 		if (e.getKeyCode() == 32) {
-			nauPropia.dispara();
+			bala = new Bala(nauPropia.getX(), nauPropia.getY(), 40, "/images/bala1.png");
+			listBalas.add(bala); //tecla espai, dispar normal
 		} // System.out.println("a la dreta"); }
-
+		if (e.getKeyCode() == 71 ) { //tecla G, dispar gran
+			bala = new Bala(nauPropia.getX(), nauPropia.getY(), 40, "/images/bala2.png");
+			listBalas.add(bala);
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 	}
 }
+
+//CLASS NAU ================================================================================================================================
 
 class Nau extends Thread {
 	private String nomNau;
@@ -145,7 +174,7 @@ class Nau extends Thread {
 		Thread t = new Thread(this);
 		t.start();
 	}
-
+	
 	public int velocitat() {
 		return v;
 	}
@@ -183,32 +212,72 @@ class Nau extends Thread {
 	public void dreta() {
 		this.dsx = 10;
 	}
+	//Getters and setters
+	public int getX() {
+		return x;
+	}
+
 	
-	 public void dispara() {
-		this.dsy = -10;
-			
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 }
 
-/*class Disparo extends Thread {
+//CLASS BALA ================================================================================================================================
+
+class Bala extends Thread {
 	
-	private int x, y;
+	private int posicioVertical;
+	private int posicioHorizontal;
+	private int velocidad;
 	private String img;
 	private Image image;
-	
-	
-	
-	public Disparo(String nomNau, int x, int y, int dsx, int dsy, int v, String direccioImatge) {
-		this.nomNau = nomNau;
-		this.x = x;
-		this.y = y;
-		this.dsx = dsx;
-		this.dsy = dsy;
-		this.v = v;
-		this.img = direccioImatge;
+
+	public Bala() {
+
+	}
+
+	public Bala(int posHorizontal, int posVertical, int velocidad, String direccioImatge) {
+		
+		this.posicioVertical = posVertical;
+		this.posicioHorizontal = posHorizontal;
+		this.velocidad = velocidad;
 		image = new ImageIcon(Nau.class.getResource(direccioImatge)).getImage();
-		Thread t = new Thread(this);
+		Thread t = new Thread(this); 
 		t.start();
-	}*/
+	}
+
+	public void moureBala() {
+		posicioVertical -= 6;
+	}
+
+	public void pinta(Graphics g) {
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.drawImage(this.image, posicioHorizontal, posicioVertical, null);
+	}
+
+	public void run() {
+		while (true) { 
+			try { Thread.sleep(this.velocidad); } catch (Exception e) {}
+			moureBala();
+		}
+	}
 	
-//}
+	public int getPosVertical() {
+		return posicioVertical;
+	}
+	
+	public int getPosHorizontal() {
+		return posicioHorizontal;
+	}
+
+	
+}
