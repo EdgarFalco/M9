@@ -113,8 +113,17 @@ class PanelNau extends JPanel implements Runnable, KeyListener {
 					e.printStackTrace();
 				}
 				
+				
 				destruirNaus();
 			}else{
+				String fiJoc;
+				if(numNaus == 0){
+					fiJoc="Tu guanyes";
+				}else{ 
+					fiJoc="Fi";
+				}
+				
+				mostraMissatge(getGraphics(),fiJoc,altura,amplada/2,30);
 				
 				for (int i = 0; i < nau.size(); i++) {
 					nau.elementAt(i).interrupt();
@@ -124,6 +133,17 @@ class PanelNau extends JPanel implements Runnable, KeyListener {
 			}
 		}                   
 	}
+	
+	private void mostraMissatge(Graphics g, String string,int x, int y, int mida) {
+
+		Font font = new Font("Arial", Font.BOLD, mida);
+		FontMetrics fontmetrics = getFontMetrics(font);
+
+		g.setColor(Color.RED);
+		g.setFont(font);
+		g.drawString(string, (x - fontmetrics.stringWidth(string)) / 2,y);
+	}
+	
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
