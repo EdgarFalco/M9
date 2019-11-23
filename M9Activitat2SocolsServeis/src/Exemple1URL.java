@@ -8,29 +8,32 @@ public class Exemple1URL {
 	
 	public static void main (String[] args) {
 		URL url;
+		//Arguments
+		String argumentDireccio = args[0];
+		int argumentPort= Integer.parseInt(args[1]);
 		
 		try {
 			
 			System.out.println("Constructor per a protocol + URL + port + directori: ");
-			url = new URL("https://es.wikipedia.org/");
+			url = new URL("https", argumentDireccio, argumentPort,"/");
 			//Crida el metode per mostra la informacio de la url especificada
-			visualitzar (url);
+			visualitzarInformacio (url);
 			//Crida el metode per llegir el codi de la url especificada
 			llegirCodi(url);
 			
 		} catch (MalformedURLException e) { System.out.println(e); }
 		
 	}
-	
-	private static void visualitzar(URL url) {
+		
+	private static void visualitzarInformacio(URL url) {
 		//Retorna url completa
-		System.out.println("\tURL complerta: "+url.toString());
+		System.out.println("\tURL complerta: " + url.toString());
 		//Retorna el protocol que utilitza
-		System.out.println("\tgetProtocol: "+url.getProtocol());
+		System.out.println("\tgetProtocol: " + url.getProtocol());
 		//Retorna la direccio del host
-		System.out.println("\tgetHost: "+url.getHost());
+		System.out.println("\tgetHost: " + url.getHost());
 		//Retorna el numero de port
-		System.out.println("\tgetPort: "+url.getPort());
+		System.out.println("\tgetPort: " + url.getPort());
 		//Retorna la ruta
 		System.out.println("\tgetFile: " + url.getFile());
 		//Retorna la informacio del usuari
