@@ -13,8 +13,10 @@ public class Exemple1URL {
 			
 			System.out.println("Constructor per a protocol + URL + port + directori: ");
 			url = new URL("https://es.wikipedia.org/");
+			//Crida el metode per mostra la informacio de la url especificada
 			visualitzar (url);
-			llegir(url);
+			//Crida el metode per llegir el codi de la url especificada
+			llegirCodi(url);
 			
 		} catch (MalformedURLException e) { System.out.println(e); }
 		
@@ -35,14 +37,14 @@ public class Exemple1URL {
 		System.out.println("\tgetUserInfo: " + url.getUserInfo());
 		//Retorna la ruta 
 		System.out.println("\tgetPath: " + url.getPath());
-		//Retorna la autoritat
+		//Retorna la autoritat de una url especifica
 		System.out.println("\tgetAuthority: " + url.getAuthority());
 		//Retorna la consulta
 		System.out.println("\tgetQuery: " + url.getQuery());
 		System.out.println("=====================================================");
 	}
 	
-	private static void llegir(URL url){
+	private static void llegirCodi(URL url){
 				
 		BufferedReader in;
 		
