@@ -21,16 +21,22 @@ public class ServidorTCP2 {
 				break;
 			}
 			Socket clientConnectat = servidor.accept();
+			
+			PrintWriter fclient = new PrintWriter(clientConnectat.getOutputStream(), true);
+			fclient.println("Benvingut client " + contador);
+			
 			System.out.println("Client connectat... ");
 			contador++;
 			
 			//FLUX DE SORTIDA AL CLIENT
 			PrintWriter fsortida = new PrintWriter(clientConnectat.getOutputStream(), true);
-	
-	
+			
+			
+			
+			
 			//FLUX D'ENTRADA DEL CLIENT
 			BufferedReader fentrada = new BufferedReader(new InputStreamReader(clientConnectat.getInputStream()));
-	
+						
 			while ((cadena = fentrada.readLine()) != null) {
 	
 				fsortida.println(cadena);
