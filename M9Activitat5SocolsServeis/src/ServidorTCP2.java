@@ -4,36 +4,51 @@ import java.io.*;
 public class ServidorTCP2 {
 
 	public static void main (String[] args) throws Exception {
-
+		
 		int numPort = 60000;
 		ServerSocket servidor = new ServerSocket(numPort);
 		String cadena = "";
+		int contador = 0;
+		boolean si = true;
+		
+		
+			System.out.println("Esperant connexió... ");
+			
+		while(si) {
+			if(contador >= 3) {
+				si = false;
+				System.out.println("Ja he atés 3 clients, no puc atendre mes clients");
+				break;
+			}
+			Socket clientConnectat = servidor.accept();
+			System.out.println("Client connectat... ");
+			contador++;
+			
+			//FLUX DE SORTIDA AL CLIENT
+			PrintWriter fsortida = new PrintWriter(clientConnectat.getOutputStream(), true);
+	
+	
+			//FLUX D'ENTRADA DEL CLIENT
+			BufferedReader fentrada = new BufferedReader(new InputStreamReader(clientConnectat.getInputStream()));
+	
+			while ((cadena = fentrada.readLine()) != null) {
+	
+				fsortida.println(cadena);
+				System.out.println("Rebent: "+ cadena);
+				if (cadena.equals("*")) 
+				break;
+	
+			}
+		
 
-		System.out.println("Esperant connexió... ");
-		Socket clientConnectat = servidor.accept();
-		System.out.println("Client connectat... ");
-
-		//FLUX DE SORTIDA AL CLIENT
-		PrintWriter fsortida = new PrintWriter(clientConnectat.getOutputStream(), true);
-
-
-		//FLUX D'ENTRADA DEL CLIENT
-		BufferedReader fentrada = new BufferedReader(new InputStreamReader(clientConnectat.getInputStream()));
-
-		while ((cadena = fentrada.readLine()) != null) {
-
-			fsortida.println(cadena);
-			System.out.println("Rebent: "+cadena);
-			if (cadena.equals("*")) break;
-
+			//TANCAR STREAMS I SOCKETS
+			System.out.println("Tancant connexió... ");
+			fentrada.close();
+			fsortida.close();
+			clientConnectat.close();
 		}
-
-		//TANCAR STREAMS I SOCKETS
-		System.out.println("Tancant connexió... ");
-		fentrada.close();
-		fsortida.close();
-		clientConnectat.close();
-		servidor.close();
+			servidor.close();
+		
 
 	}
 
