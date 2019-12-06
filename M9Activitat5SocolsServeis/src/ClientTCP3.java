@@ -15,26 +15,28 @@ public class ClientTCP3 {
 
 		//FLUX D'ENTRADA AL SERVIDOR
 		BufferedReader fentrada = new BufferedReader(new InputStreamReader(client.getInputStream()));
-
+		
 		//FLUX PER A ENTRADA ESTÀNDARD
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-
-		String cadena, eco = "";
+		
+		String eco2 = "";
+		String cadena, eco1 = "";
+				
+		eco2 = fentrada.readLine();
+		System.out.println(eco2);
 		System.out.println("Introdueix la cadena: ");
 		//Lectura teclat
 		cadena = in.readLine();
-
+				
 		while (cadena != null) {
 
 			//Enviament cadena al servidor
 			fsortida.println(cadena);
 			//Rebuda cadena del servidor
-			eco = fentrada.readLine();
-			System.out.println("  =>ECO: "+eco);
+			eco1 = fentrada.readLine();
+			System.out.println("  =>ECO: "+ eco1);
 			//Lectura del teclat
 			cadena = in.readLine();
-
-
 		}
 
 		fsortida.close();
@@ -42,7 +44,6 @@ public class ClientTCP3 {
 		System.out.println("Finalització de l'enviament...");
 		in.close();
 		client.close();
-
 	}
 
 

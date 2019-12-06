@@ -4,7 +4,7 @@ import java.io.*;
 public class ServidorTCP4 {
 
 	public static void main (String[] args) throws Exception {
-		
+		//Establim un parametre per controlar els clients.
 		int numeroClients = Integer.parseInt(args[0]);
 		int numPort = 60000;
 		ServerSocket servidor = new ServerSocket(numPort);
@@ -16,7 +16,7 @@ public class ServidorTCP4 {
 			System.out.println("Esperant connexió... ");
 			
 		while(si) {
-			if(contador >= numeroClients) {
+			if(contador < numeroClients) {
 				si = false;
 				System.out.println("Ja he atés 3 clients, no puc atendre mes clients");
 				break;

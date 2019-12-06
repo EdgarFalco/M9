@@ -21,13 +21,13 @@ public class ClientTCP2 {
 		
 		String eco2 = "";
 		String cadena, eco1 = "";
+				
+		eco2 = fentrada.readLine();
+		System.out.println(eco2);
 		System.out.println("Introdueix la cadena: ");
 		//Lectura teclat
 		cadena = in.readLine();
-		
-		eco2 = fentrada.readLine();
-		System.out.println(eco2);
-		
+				
 		while (cadena != null) {
 
 			//Enviament cadena al servidor
@@ -37,8 +37,6 @@ public class ClientTCP2 {
 			System.out.println("  =>ECO: "+ eco1);
 			//Lectura del teclat
 			cadena = in.readLine();
-
-
 		}
 
 		fsortida.close();
@@ -46,7 +44,6 @@ public class ClientTCP2 {
 		System.out.println("Finalització de l'enviament...");
 		in.close();
 		client.close();
-
 	}
 
 
