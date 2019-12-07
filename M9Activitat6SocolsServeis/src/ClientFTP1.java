@@ -11,7 +11,7 @@ public class ClientFTP1 {
 		
 		//Servidor FTP
 		String ServerFTP = "ftp.urv.es";
-		System.out.println("Ens connectem al servidor: "+ServerFTP);
+		System.out.println("Ens connectem al servidor: " + ServerFTP);
 		client.connect(ServerFTP);
 		
 		

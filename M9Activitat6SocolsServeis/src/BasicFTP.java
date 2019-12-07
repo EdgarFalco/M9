@@ -1,7 +1,6 @@
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.SocketException;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -33,8 +32,9 @@ public class BasicFTP {
 		try {
 
 			System.out.println("Ens connectem al servidor: " + servidor);
-//			cliente.connect(servidor);
-//			cliente.login(usuario, contrasena);
+
+			//Crea el directori
+			//			String adreca = "\\prova\\docs\\nouDirectori";
 
 			if (cliente.makeDirectory(direccion)) {
 				System.out.println("Directori creat... ");
@@ -43,8 +43,6 @@ public class BasicFTP {
 				System.out.println("No s'ha pogut crear el directori... ");
 			}
 
-//			cliente.logout();
-//			cliente.disconnect();
 			System.out.println("L'operació ha acabat... ");
 
 		} catch (IOException ioe) {
@@ -57,17 +55,15 @@ public class BasicFTP {
 		try {
 
 			System.out.println("Ens connectem al servidor: " + servidor);
-//			cliente.connect(servidor);
-//			cliente.login(usuario, contrasena);
 
+			//Elimina el fitxer
+			//			String adreca = "\\prova\\docs\\holaNou.txt";
 			if (cliente.deleteFile(direccion + nomFichero)) {
 				System.out.println("Fitxer eliminat... ");
 			} else {
 				System.out.println("No s'ha pogut eliminar el fitxer... ");
 			}
 
-//			cliente.logout();
-//			cliente.disconnect();
 			System.out.println("L'operació ha acabat... ");
 
 		} catch (IOException ioe) {
@@ -79,28 +75,21 @@ public class BasicFTP {
 
 		try {
 			System.out.println("Ens connectem al servidor: " + servidor);
-//			cliente.connect(servidor);
 			boolean login = getUsuarioConectado();
-//			String adreca = "\\lib";
+			//			String adreca = "\\lib";
 
 			if (login) {
 
-				// Le pasamos la direccion donde queremos subir el fichero
+				// Le pasamos la direccion donde queremos subir el archivo
 				cliente.changeWorkingDirectory(direccion);
 				cliente.setFileType(FTP.BINARY_FILE_TYPE);
 
 				//Stream d'entrada amb el fitxer que es vol pujar
-//				BufferedInputStream in = new BufferedInputStream(new FileInputStream("/home/user/text1.txt"));
+				//				BufferedInputStream in = new BufferedInputStream(new FileInputStream("/home/user/text1.txt"));
 				BufferedInputStream in = new BufferedInputStream(new FileInputStream(direccionSubir + nomFichero));
 				cliente.storeFile("text1.txt", in);
 
-//				//Stream d'entrada amb el fitxer que es vol pujar
-//				in = new BufferedInputStream(new FileInputStream("/home/user/world01.png"));
-//				cliente.storeFile("world01.png", in);
-
 				in.close();
-//				cliente.logout();
-//				cliente.disconnect();
 				System.out.println("L'operació ha acabat... ");
 			}
 		} catch (IOException ioe) {
@@ -112,8 +101,6 @@ public class BasicFTP {
 
 		try {
 			System.out.println("Ens connectem al servidor: " + servidor);
-//			cliente.connect(servidor);
-//			cliente.login(usuario, contrasena);
 
 			//Descarregar el fitxer
 			//			String adreca = "\\prova\\docs\\";
@@ -124,12 +111,10 @@ public class BasicFTP {
 				System.out.println("Fitxer reanomenat... ");
 
 			} else {
-				
+
 				System.out.println("No s'ha pogut reanomenat el fitxer... ");
 			}
 
-//			cliente.logout();
-//			cliente.disconnect();
 			System.out.println("L'operació ha acabat... ");
 
 		} catch (IOException e) {
@@ -152,7 +137,7 @@ public class BasicFTP {
 	public String getContrasena() {
 		return contrasena;
 	}
-	
+
 	public boolean getUsuarioConectado() {
 		return usuarioConectado;
 	}
