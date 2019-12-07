@@ -45,8 +45,7 @@ public class ClientFTP2 {
 							"2. Eliminar Fitxer\n"+
 							"3. Pujar Fitxer\n"+
 							"4. Renombrar Fitxer\n"+
-							"5. Eliminar Fitxer\n"+
-							"6. Sortir");
+							"5. Sortir");
 
 					int linea = sc.nextInt();
 
@@ -96,16 +95,6 @@ public class ClientFTP2 {
 						basicFtp.renombrarFicheroFTP(textDireccio, nomFitxer, nomFitxerNou);
 						break;
 					case 5:
-						//Demanara a l'usuari introduir dades
-						System.out.println("5.Eliminar Fitxer");
-						System.out.println("Introdueix una direccio on borrar el fitxer:");
-						textDireccio = sc.nextLine();
-						System.out.println("Introdueix el nom del fitxer");
-						nomFitxer = sc.nextLine();
-						//Eliminar fitxer del ftp
-						basicFtp.eliminarFicheroFTP(textDireccio, nomFitxer);
-						break;
-					case 6:
 						// sortim
 						System.out.println("Has sortit del programa FTP");
 						continuar = false;
