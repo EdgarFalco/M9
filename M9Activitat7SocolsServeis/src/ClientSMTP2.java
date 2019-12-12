@@ -23,7 +23,7 @@ public class ClientSMTP2 {
 		//Dades d'usuari i del servidor
 		String server = "smtp.gmail.com";
 		String username = "falco.edgar@gmail.com";
-		String contrasenya = "baix3185";
+		String contrasenya = "*****";
 		int port = 587;
 		
 		try {
@@ -55,7 +55,7 @@ public class ClientSMTP2 {
 			System.out.println("2 - "+ client.getReplyString());
 			
 			//S'executa l'ordre STARTTLS i es comprova si és true
-			if (client.execTLS()) {
+			if (client.execTLS()) { // ExecTLS fa la negociacio per establir la connexio TLS. Si retorna true la connexio es acceptada.
 				
 				System.out.println("3 -"+client.getReplyString());
 				
