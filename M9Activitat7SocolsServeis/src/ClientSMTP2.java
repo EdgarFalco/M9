@@ -6,9 +6,12 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Scanner;
+
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import org.apache.commons.net.smtp.*;
+import java.util.Date;
 
 public class ClientSMTP2 {
 	
@@ -58,11 +61,26 @@ public class ClientSMTP2 {
 				
 				//Es fa l'autenticació amb el servidor
 				if (client.auth(AuthenticatingSMTPClient.AUTH_METHOD.PLAIN, username, contrasenya)) {
+					//Obtenim la data actual
+					Date date = new Date();
+					String fecha = date.toString();
 					
-					System.out.println("4 -"+client.getReplyString());
-					String desti1 = "pferre2@xtec.cat";
-					String asumpte = "Prova SMTPClient";
-					String missatge = "Hola. \nSalutacions. \nFent servir GMAIL. \nAdeu.";
+					System.out.println("4 -" + client.getReplyString());
+					Scanner sc1 = new Scanner(System.in);
+					System.out.println("Intrdueix un email desti: ");
+					String desti1 = sc1.nextLine();
+					//Al assumpte primer mostrem la data i despres l'assumpte
+					Scanner sc2 = new Scanner(System.in);
+					System.out.println("Intrdueix un assumpte: ");
+					String asumpte = fecha + " " + sc2.nextLine();
+					
+					Scanner sc3 = new Scanner(System.in);
+					System.out.println("Intrdueix el missatge: ");
+					String missatge = sc3.nextLine();
+										
+					//String desti1 = "falco.edgar@gmail.com"; //pferre2@xtec.cat
+					//String asumpte = "Prova SMTPClient";
+					//String missatge = "Hola. \nSalutacions. \nFent servir GMAIL. \nAdeu.";
 					
 					//Es crea la capçalera
 					SimpleSMTPHeader capcalera = new SimpleSMTPHeader(username, desti1, asumpte);
